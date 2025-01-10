@@ -7,6 +7,21 @@ use Illuminate\Database\Eloquent\Model;
 
 class Evento extends Model
 {
-    /** @use HasFactory<\Database\Factories\EventoFactory> */
     use HasFactory;
+
+    protected $table = 'eventos';
+
+    protected $fillable = [
+        'titulo',
+        'descripcion',
+        'ubicacion',
+        'dia',
+        'mes',
+        'dia_evento',
+        'horario',
+        'precio',
+        'image',
+        'extra',
+    ];
 }
+

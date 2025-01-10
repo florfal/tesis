@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Event;
+use App\Models\Evento;
+use Carbon\Carbon;
 
 class HomeController extends Controller
 {
 
-    public function index(){
-        return view('index');
+    public function index() { 
+        $currentDate = Carbon::now(); $proximos_eventos = Evento::where('dia_evento', '>=', $currentDate) ->orderBy('dia_evento') ->take(5) ->get(); $destacados = Evento::inRandomOrder()->take(4)->get(); return view('index', compact('proximos_eventos', 'destacados')); 
     }
     
     public function events(){
