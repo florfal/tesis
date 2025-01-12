@@ -24,7 +24,8 @@ class EventoFactory extends Factory
             'dia'=>decimal('dia'),
             'mes'=>string('mes'),
             'dia_evento'=>string('dia_evento'),
-            'horario'=>string('horario'),
+            'hora_inicio' => $hora_inicio, 
+            'hora_fin' => $hora_fin,
             'precio'=>decimal('precio'),
             'image'=>string('image')->nullable(),
             'extra'=>string('extra')

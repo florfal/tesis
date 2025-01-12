@@ -1,42 +1,40 @@
 @extends('layouts.main')
 
-@section('title', 'Eventos')
+@section('title', $evento->titulo)
 
 @section('content')
-
 <div>
-
     <div>
         <a href="{{ route('events') }}">
             <div class="back-button">&#8592;</div>  
         </a>
         <div class="image-container">
-            <img src="img/destacados/ceramica.jpg" alt="Evento de cerámica y vino" class="card-image">
+            <img src="{{ $evento->imagen }}" alt="{{ $evento->titulo }}" class="card-image">
         </div>
 
         <div class="event-details">
-            <h3 class="">Cerámica y vino</h3>
-            <p class="text-black"><span class="location-icon">📍</span>Taller Obra, Palermo.</p>
+            <h3 class="">{{ $evento->titulo }}</h3>
+            <p class="text-black"><span class="location-icon">📍</span>{{ $evento->ubicacion }}</p>
             <div class="separator"></div>
 
             <!-- Sección Acerca del Evento -->
             <div class="section">
                 <h4 class="text-black">Acerca del evento</h4>
-                <p class="text-black">Únete a nosotros para una experiencia única en la que podrás explorar tu creatividad mientras disfrutas de una copa de vino. Este curso de cerámica es perfecto para relajarte, aprender técnicas básicas y crear tus propias piezas de arte en un ambiente amigable y acogedor.</p>
+                <p class="text-black">{{ $evento->descripcion }}</p>
             </div>
 
             <!-- Sección Horarios -->
             <div class="section">
                 <h4 class="text-black">Horarios</h4>
-                <p class="text-black"><strong>Días:</strong> Sábados y domingos</p>
-                <p class="text-black"><strong>Hora:</strong> 6:00 PM - 9:00 PM</p>
+                <p class="text-black"><strong>Días:</strong> {{ $evento->dia_evento }}</p>
+                <p class="text-black"><strong>Hora:</strong> {{ $evento->hora_inicio }} - {{ $evento->hora_fin }}</p>
             </div>
 
             <!-- Sección Precio -->
             <div class="section">
                 <h4 class="text-black">Precio</h4>
-                <p class="text-black"><strong>Costo:</strong> $5000 por persona</p>
-                <p class="text-black"><small>Incluye materiales y una copa de vino</small></p>
+                <p class="text-black"><strong>Costo:</strong> ${{ $evento->precio }} por persona</p>
+                <p class="text-black"><small>{{ $evento->extra }}</small></p>
             </div>
 
             <div class="separator"></div>
@@ -89,9 +87,6 @@
             }
         });
         });
-
     </script>
 </div>
-
-
 @endsection

@@ -17,9 +17,12 @@ class HomeController extends Controller
         return view('events');
     }
     
-    public function event(){
-        return view('event');
+    public function event($id)
+    {
+        $evento = Evento::findOrFail($id);
+        return view('event', compact('evento'));
     }
+    
 
     public function destacados(){
         return view('destacados');

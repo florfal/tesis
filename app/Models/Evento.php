@@ -11,6 +11,8 @@ class Evento extends Model
 
     protected $table = 'eventos';
 
+    protected $primaryKey = 'evento_id';
+
     protected $fillable = [
         'titulo',
         'descripcion',
