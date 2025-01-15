@@ -36,13 +36,14 @@ class EventoSeeder extends Seeder
                 'descripcion'=> 'Únete a nosotros para una experiencia única en la que podrás explorar tu creatividad mientras disfrutas de una copa de vino. Este curso de cerámica es perfecto para relajarte, aprender técnicas básicas y crear tus propias piezas de arte en un ambiente amigable y acogedor.',
                 'ubicacion' => 'Taller Obra, Palermo.',
                 'dia' => 7,
-                'mes' => 'Dic', 
+                'mes' => 'Dic',
                 'dia_evento' => 'Sabados y Domingos',
                 'hora_inicio' => '18:00',
                 'hora_fin' => '21:00',
                 'precio' => 30000,
                 'imagen' => 'img/destacados/ceramica.jpg',
-                'extra' => 'materiales y una copa de vino'
+                'extra' => 'materiales y una copa de vino',
+                'categoria' => 'Arte y Manualidades'
             ],
             [
                 'evento_id' => 2,
@@ -56,7 +57,8 @@ class EventoSeeder extends Seeder
                 'hora_fin' => '15:00',
                 'precio' => 35000,
                 'imagen' => 'img/prox_eventos/joyeria.jpg',
-                'extra' => 'materiales básicos para crear una joya'
+                'extra' => 'materiales básicos para crear una joya',
+                'categoria' => 'Arte y Manualidades'
             ],
             [
                 'evento_id' => 3,
@@ -70,7 +72,8 @@ class EventoSeeder extends Seeder
                 'hora_fin' => '00:00',
                 'precio' => 10000,
                 'imagen' => 'img/prox_eventos/show.jpg',
-                'extra' => 'no incluye mantas. Incluye una comida'
+                'extra' => 'no incluye mantas. Incluye una comida',
+                'categoria' => 'Música y Espectáculos'
             ],
             [
                 'evento_id' => 4,
@@ -84,7 +87,8 @@ class EventoSeeder extends Seeder
                 'hora_fin' => '00:00',
                 'precio' => 50000,
                 'imagen' => 'img/prox_eventos/cena_vela.jpg',
-                'extra' => 'no incluye extras'
+                'extra' => 'no incluye extras',
+                'categoria' => 'Gastronomía'
             ],
             [
                 'evento_id' => 5,
@@ -98,7 +102,8 @@ class EventoSeeder extends Seeder
                 'hora_fin' => '17:00',
                 'precio' => 40000,
                 'imagen' => 'img/prox_eventos/cocina.jpg',
-                'extra' => 'materiales necesarios para las clases'
+                'extra' => 'materiales necesarios para las clases',
+                'categoria' => 'Educación y Talleres'
             ],
             [
                 'evento_id' => 6,
@@ -112,7 +117,8 @@ class EventoSeeder extends Seeder
                 'hora_fin' => '05:00',
                 'precio' => 0,
                 'imagen' => 'img/destacados/fogon.jpg',
-                'extra' => 'es necesario traer bebida y comida'
+                'extra' => 'es necesario traer bebida y comida',
+                'categoria' => 'Naturaleza y Aventura'
             ],
             [
                 'evento_id' => 7,
@@ -126,7 +132,8 @@ class EventoSeeder extends Seeder
                 'hora_fin' => '20:00',
                 'precio' => 40000,
                 'imagen' => 'img/destacados/ceramica.jpg',
-                'extra' => 'incluye materiales y bebidas'
+                'extra' => 'incluye materiales y bebidas',
+                'categoria' => 'Arte y Manualidades'
             ],
             [
                 'evento_id' => 8,
@@ -140,7 +147,8 @@ class EventoSeeder extends Seeder
                 'hora_fin' => '21:00',
                 'precio' => 45000,
                 'imagen' => 'img/destacados/taller_cocina.jpg',
-                'extra' => 'incluye ingredientes y recetario'
+                'extra' => 'incluye ingredientes y recetario',
+                'categoria' => 'Gastronomía'
             ],
             [
                 'evento_id' => 9,
@@ -154,7 +162,8 @@ class EventoSeeder extends Seeder
                 'hora_fin' => '22:00',
                 'precio' => 25000,
                 'imagen' => 'img/destacados/cerveza.jpg',
-                'extra' => 'incluye degustación y un vaso de recuerdo'
+                'extra' => 'incluye degustación y un vaso de recuerdo',
+                'categoria' => 'Gastronomía'
             ],
             [
                 'evento_id' => 10,
@@ -168,7 +177,8 @@ class EventoSeeder extends Seeder
                 'hora_fin' => '00:00',
                 'precio' => 10000,
                 'imagen' => 'img/destacados/movie.jpg',
-                'extra' => 'llevar manta para mayor comodidad'
+                'extra' => 'llevar manta para mayor comodidad',
+                'categoria' => 'Cine y Cultura'
             ],
             [
                 'evento_id' => 11,
@@ -182,7 +192,8 @@ class EventoSeeder extends Seeder
                 'hora_fin' => '13:00',
                 'precio' => 20000,
                 'imagen' => 'img/eventos/heart.svg',
-                'extra' => 'incluye hilos y lienzos'
+                'extra' => 'incluye hilos y lienzos',
+                'categoria' => 'Arte y Manualidades'
             ],
             [
                 'evento_id' => 12,
@@ -196,7 +207,8 @@ class EventoSeeder extends Seeder
                 'hora_fin' => '00:00',
                 'precio' => 60000,
                 'imagen' => 'img/novedades/rock.jpg',
-                'extra' => 'entrada incluye bebida'
+                'extra' => 'entrada incluye bebida',
+                'categoria' => 'Música y Espectáculos'
             ],
             [
                 'evento_id' => 13,
@@ -210,7 +222,8 @@ class EventoSeeder extends Seeder
                 'hora_fin' => '19:00',
                 'precio' => 15000,
                 'imagen' => 'img/novedades/exposicion_arte.jpg',
-                'extra' => 'incluye guía interactiva'
+                'extra' => 'incluye guía interactiva',
+                'categoria' => 'Cine y Cultura'
             ],
             [
                 'evento_id' => 14,
@@ -224,7 +237,8 @@ class EventoSeeder extends Seeder
                 'hora_fin' => '18:00',
                 'precio' => 50000,
                 'imagen' => 'img/novedades/feria_tecno.jpg',
-                'extra' => 'incluye material de exposición'
+                'extra' => 'incluye material de exposición',
+                'categoria' => 'Tecnología e Innovación'
             ],
             [
                 'evento_id' => 15,
@@ -238,7 +252,8 @@ class EventoSeeder extends Seeder
                 'hora_fin' => '00:00',
                 'precio' => 40000,
                 'imagen' => 'img/novedades/navidad.jpg',
-                'extra' => 'incluye cena navideña'
+                'extra' => 'incluye cena navideña',
+                'categoria' => 'Fiestas y Celebraciones'
             ],
             [
                 'evento_id' => 16,
@@ -252,8 +267,19 @@ class EventoSeeder extends Seeder
                 'hora_fin' => '00:00',
                 'precio' => 70000,
                 'imagen' => 'img/prox_eventos/show.jpg',
-                'extra' => 'incluye brindis de fin de año'
+                'extra' => 'incluye brindis de fin de año',
+                'categoria' => 'Música y Espectáculos'
             ]
         ]);
     }
 }
+
+//Categorias: 
+// Arte y Manualidades: Eventos relacionados con la creatividad, como cerámica, bordado, pintura o joyería.
+// Música y Espectáculos: Conciertos, shows en vivo, performances.
+// Gastronomía: Talleres de cocina, catas, cenas temáticas.
+// Educación y Talleres: Cursos y capacitaciones de cualquier temática.
+// Cine y Cultura: Proyecciones de cine, exposiciones artísticas.
+// Tecnología e Innovación: Ferias de tecnología, hackathons, charlas de tecnología.
+// Fiestas y Celebraciones: Fiestas temáticas, eventos navideños, celebraciones públicas.
+// Naturaleza y Aventura: Campamentos, fogones, actividades al aire libre.

@@ -5,50 +5,35 @@ namespace App\Http\Controllers;
 use App\Models\Evento;
 use Illuminate\Http\Request;
 
-class EventosController extends Controller
+class EventoController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $eventos = Evento::all();
-        return view('eventos.index', compact('eventos'));
-    }
+        $query = Evento::query();
 
-    public function show($id)
-    {
-        $evento = Evento::findOrFail($id);
-        return view('eventos.show', compact('evento'));
-    }
+        if ($request->filled('horario')) {
+            $query->where('hora_inicio', '<=', $request->horario)
+                  ->where('hora_fin', '>=', $request->horario);
+        }
 
-    public function create()
-    {
-        return view('eventos.create');
-    }
+        if ($request->filled('precio')) {
+            $query->where('precio', '<=', $request->precio);
+        }
 
-    public function store(Request $request)
-    {
-        $evento = new Evento($request->all());
-        $evento->save();
-        return redirect()->route('eventos.index');
-    }
+        if ($request->filled('ubicacion')) {
+            $query->where('ubicacion', 'like', '%' . $request->ubicacion . '%');
+        }
 
-    public function edit($id)
-    {
-        $evento = Evento::findOrFail($id);
-        return view('eventos.edit', compact('evento'));
-    }
+        if ($request->filled('categoria')) {
+            $query->where('categoria', $request->categoria);
+        }
 
-    public function update(Request $request, $id)
-    {
-        $evento = Evento::findOrFail($id);
-        $evento->update($request->all());
-        return redirect()->route('eventos.index');
-    }
+        if ($request->filled('recientes')) {
+            $query->orderBy('created_at', 'desc');
+        }
 
-    public function destroy($id)
-    {
-        $evento = Evento::findOrFail($id);
-        $evento->delete();
-        return redirect()->route('eventos.index');
+        $eventos = $query->get();
+
+        return view('events', compact('eventos')); // Cambiado a 'events'
     }
 }
-

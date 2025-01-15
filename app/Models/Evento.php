@@ -24,6 +24,7 @@ class Evento extends Model
         'precio',
         'image',
         'extra',
+        'categoria',
     ];
 }
 

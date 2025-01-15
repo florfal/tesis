@@ -26,6 +26,7 @@ class CreateEventosTable extends Migration
             $table->decimal('precio', 10, 2)->nullable();
             $table->string('imagen')->nullable();
             $table->text('extra')->nullable();
+            $table->string('categoria');
             $table->timestamps();
         });
     }

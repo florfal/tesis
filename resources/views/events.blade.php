@@ -13,7 +13,7 @@
                 <img src="img/logonegro.png" alt="Logo" class="navbar-logo">
                 <!-- Formulario de búsqueda -->
                 <form class="d-flex search-form mx-2 flex-grow-1" role="search">
-                    <input class="form-control rounded-border" type="search" placeholder="Search" aria-label="Search">
+                    <input class="form-control rounded-border" type="search" placeholder="Search" aria-label="Search" name="search">
                     <button class="btn search-btn" type="submit">
                         <img src="img/nav/magnifying-glass.svg" alt="Search">
                     </button>
@@ -27,132 +27,95 @@
     </div>
     <!-- Filtros -->
     <div>
-        <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-            <!-- Slide 1 -->
-            <div class="carousel-item active">
-                <div class="row text-center">
-                    <div class="col-4">
-                        <div class="card custom-card">
-                            <div class="card-body d-flex">
-                                <p class="filtros">Horario <img src="img/eventos/clock.svg" alt="Icono de Horario" class="icon"></p>
+        <form method="GET" action="{{ route('events') }}">
+            <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                <!-- Slide 1 -->
+                <div class="carousel-item active">
+                    <div class="row text-center">
+                        <div class="col-4">
+                            <div class="card custom-card">
+                                <div class="card-body d-flex">
+                                    <label for="horario" class="filtros">Horario</label>
+                                    <input type="time" id="horario" name="horario" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="card custom-card">
+                                <div class="card-body d-flex">
+                                    <label for="precio" class="filtros">Precio</label>
+                                    <input type="number" id="precio" name="precio" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="card custom-card">
+                                <div class="card-body d-flex align-items-center justify-content-center">
+                                    <label for="ubicacion" class="filtros">Ubicación</label>
+                                    <input type="text" id="ubicacion" name="ubicacion" class="form-control">
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-4">
-                        <div class="card custom-card">
-                            <div class="card-body d-flex">
-                                <p class="filtros">Precio <img src="img/eventos/price-tag.svg" alt="Icono de Precio" class="icon"></p>
+                </div>
+                <!-- Slide 2 -->
+                <div class="carousel-item">
+                    <div class="row text-center">
+                        <div class="col-4">
+                            <div class="card custom-card">
+                                <div class="card-body d-flex align-items-center justify-content-center">
+                                    <label for="categoria" class="filtros">Categoría</label>
+                                    <select id="categoria" name="categoria" class="form-control">
+                                        <option value="">Seleccionar</option>
+                                        <option value="arte">Arte</option>
+                                        <option value="musica">Música</option>
+                                        <option value="gastronomia">Gastronomía</option>
+                                        <!-- Añadir más categorías según sea necesario -->
+                                    </select>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-4">
-                        <div class="card custom-card">
-                            <div class="card-body d-flex align-items-center justify-content-center">
-                                <p class="filtros">Ubicación <img src="img/eventos/location.svg" alt="Icono de Ubicación" class="icon"></p>
+                        <div class="col-4">
+                            <div class="card custom-card">
+                                <div class="card-body d-flex align-items-center justify-content-center">
+                                    <label for="recientes" class="filtros">Recientes</label>
+                                    <input type="checkbox" id="recientes" name="recientes" class="form-check-input">
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- Slide 2 -->
-            <div class="carousel-item">
-                <div class="row text-center">
-                    <div class="col-4">
-                        <div class="card custom-card">
-                            <div class="card-body d-flex align-items-center justify-content-center">
-                                <p class="filtros">Categoría <img src="img/eventos/category.svg" alt="Icono de Categoría" class="icon"></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-4">
-                        <div class="card custom-card">
-                            <div class="card-body d-flex align-items-center justify-content-center">
-                                <a href="{{ route('destacados') }}"> 
-                                    <p class="filtros">Destacados <img src="img/destacados/destacados.svg" alt="Icono de Duración" class="icon"></p>
-                                </a>
-                                
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-4">
-                        <div class="card custom-card">
-                            <div class="card-body d-flex align-items-center justify-content-center">
-                                <p class="filtros">Recientes <img src="img/eventos/recent.svg" alt="Icono de Recientes" class="icon"></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+            <button type="submit" class="btn btn-primary">Aplicar filtros</button>
+        </form>
     </div>
+
     <!-- Eventos -->
     <div>
+        @foreach($eventos as $evento)
         <div class="destacados">
-            <a href="{{ route('event') }}">
-               <div class="card text-bg-dark">
-                <div class="card-overlay">
-                    <img src="img/destacados/ceramica.jpg" class="card-img" alt="...">
-                </div>
-                    
+            <a href="{{ route('event', $evento->evento_id) }}">
+                <div class="card text-bg-dark">
+                    <div class="card-overlay">
+                        <img src="{{ $evento->imagen }}" class="card-img" alt="{{ $evento->titulo }}">
+                    </div>
                     <div class="card-img-overlay d-flex flex-column justify-content-end">
                         <h5 class="card-title d-flex align-items-center">
-                            Cerámica Ritual by fina Dane
-                            <img src="img/eventos/heart.svg" alt="heart icon"  class="ms-5">
+                            {{ $evento->titulo }}
+                            <img src="img/eventos/heart.svg" alt="heart icon" class="ms-5">
                         </h5>
                     </div>
-                </div> 
+                </div>
             </a>
-            
         </div>
-        <div class="destacados">
-            <div class="card text-bg-dark">
-                <div class="card-overlay">
-                      <img src="img/prox_eventos/bordado.jpg" class="card-img" alt="...">  
-                </div>
-            
-                <div class="card-img-overlay d-flex flex-column justify-content-end">
-                    <h5 class="card-title d-flex align-items-center">
-                    Puntadas del Alma by Hilos y Raíces
-                        <img src="img/eventos/heart.svg" alt="heart icon"  class="ms-5">
-                    </h5>
-                </div>
-            </div>
-        </div>
-        <div class="destacados">
-            <div class="card text-bg-dark">
-                <div class="card-overlay">
-                    <img src="img/destacados/cerveza.jpg" class="card-img" alt="...">  
-                </div>
-            
-                <div class="card-img-overlay d-flex flex-column justify-content-end">
-                    <h5 class="card-title d-flex align-items-center">
-                    Cata Salvaje by Maestros Cerveceros
-                    <img src="img/eventos/heart.svg" alt="heart icon"  class="ms-5">
-                    </h5>
-                </div>
-            </div>
-        </div>
-        <div class="destacados">
-            <div class="card text-bg-dark">
-                <div class="card-overlay">
-                    <img src="img/destacados/taller_cocina.jpg" class="card-img" alt="...">   
-                </div>
-             
-                <div class="card-img-overlay d-flex flex-column justify-content-end">
-                    <h5 class="card-title d-flex align-items-center">
-                    Sabores Ancestrales by Culinaria Viva
-                    <img src="img/eventos/heart.svg" alt="heart icon"  class="ms-5">
-                    </h5>
-                </div>
-            </div>
-        </div>
-
+        @endforeach
     </div>
     <br>
     <br>
     <x-nav></x-nav>
 
 </div>
+
 
 @endsection

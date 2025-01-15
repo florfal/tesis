@@ -9,7 +9,7 @@
             <div class="back-button">&#8592;</div>  
         </a>
         <div class="image-container">
-            <img src="{{ $evento->imagen }}" alt="{{ $evento->titulo }}" class="card-image">
+            <img src="{{ asset($evento->imagen) }}" alt="{{ $evento->titulo }}" class="card-image">
         </div>
 
         <div class="event-details">
