@@ -27,7 +27,7 @@ class EventoFactory extends Factory
             'hora_inicio' => $hora_inicio, 
             'hora_fin' => $hora_fin,
             'precio'=>decimal('precio'),
-            'image'=>string('image')->nullable(),
+            'image'=>string('imagen')->nullable(),
             'extra'=>string('extra'),
             'categoria'=>string('categoria'),
         ];

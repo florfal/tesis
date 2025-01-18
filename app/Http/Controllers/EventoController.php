@@ -36,4 +36,16 @@ class EventoController extends Controller
 
         return view('events', compact('eventos')); // Cambiado a 'events'
     }
+    public function novedades()
+    {
+        $eventos = Evento::all()->groupBy(function ($evento) {
+            return $evento->dia . ' ' . $evento->mes;
+        });
+    
+        return view('novedades', [
+            'groupedEvents' => $eventos,
+        ]);
+    }
+    
+
 }

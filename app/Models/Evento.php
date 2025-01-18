@@ -22,7 +22,7 @@ class Evento extends Model
         'dia_evento',
         'horario',
         'precio',
-        'image',
+        'imagen',
         'extra',
         'categoria',
     ];
