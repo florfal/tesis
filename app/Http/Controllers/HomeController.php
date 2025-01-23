@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Evento;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -28,9 +29,12 @@ class HomeController extends Controller
         return view('destacados');
     }
 
+
     public function user(){
-        return view('user');
+        $user = Auth::user();
+        return view('user', compact('user'));
     }
+
 
     public function form(){
         return view('form');

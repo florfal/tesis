@@ -8,4 +8,10 @@ export default defineConfig({
             refresh: true,
         }),
     ],
+    server: {
+        host: true, // Esto asegura que Vite utilice la IP del host
+        port: 3000, // O el puerto que prefieras
+    },
 });
+
+
