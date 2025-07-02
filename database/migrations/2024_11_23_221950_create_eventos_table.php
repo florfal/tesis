@@ -21,12 +21,22 @@ class CreateEventosTable extends Migration
             $table->integer('dia');
             $table->string('mes');
             $table->string('dia_evento');
-            $table->time('hora_inicio'); // Hora de inicio
-            $table->time('hora_fin'); // Hora de fin
+            $table->time('hora_inicio'); 
+            $table->time('hora_fin'); 
             $table->decimal('precio', 10, 2)->nullable();
             $table->string('imagen')->nullable();
             $table->text('extra')->nullable();
             $table->string('categoria');
+
+            // Campo creator_id (usuario que creó el evento)
+            $table->unsignedBigInteger('creator_id')->nullable();
+
+            // Clave foránea hacia la tabla users
+            $table->foreign('creator_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('set null');
+
             $table->timestamps();
         });
     }

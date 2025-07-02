@@ -12,6 +12,32 @@ use Illuminate\View\View;
 class ProfileController extends Controller
 {
     /**
+     * Display the user's profile overview.
+     */
+    public function show(Request $request): View
+    {
+        $user = $request->user();
+
+        // Cargar eventos creados y a los que asiste
+        $createdEvents = $user->createdEvents ?? [];
+        $attendingEvents = $user->attendingEvents ?? [];
+
+        // Contadores
+        $eventsCount = count($createdEvents) + count($attendingEvents);
+        $followersCount = $user->followers()->count();
+        $followingCount = $user->following()->count();
+
+        return view('profile', [
+            'user' => $user,
+            'createdEvents' => $createdEvents,
+            'attendingEvents' => $attendingEvents,
+            'eventsCount' => $eventsCount,
+            'followersCount' => $followersCount,
+            'followingCount' => $followingCount,
+        ]);
+    }
+
+    /**
      * Display the user's profile form.
      */
     public function edit(Request $request): View

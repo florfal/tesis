@@ -1,40 +1,56 @@
 <?php
 
-// AuthenticatedSessionController
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\LoginRequest;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 
 class AuthenticatedSessionController extends Controller
 {
-    public function create()
+    /**
+     * Display the login view.
+     */
+    public function create(): View
     {
-        if (Auth::check()) {
-            return redirect()->route('user.profile');
-        }
-        return view('auth.login'); // Asegúrate de que esta ruta sea correcta
+        return view('auth.login');
     }
+
+    /**
+     * Handle an incoming authentication request.
+     */
 
     public function store(Request $request)
     {
-        $credentials = $request->only('email', 'password');
+        $credentials = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
 
         if (Auth::attempt($credentials)) {
-            return redirect()->route('user.profile');
+            $request->session()->regenerate();
+            return redirect()->intended('/dashboard');
         }
 
-        return back()->withErrors('Las credenciales no coinciden.');
+        return back()->withErrors([
+            'email' => 'Las credenciales no coinciden.',
+        ]);
     }
 
-    public function destroy(Request $request)
+    /**
+     * Destroy an authenticated session.
+     */
+    public function destroy(Request $request): RedirectResponse
     {
-        Auth::logout();
+        Auth::guard('web')->logout();
+
         $request->session()->invalidate();
+
         $request->session()->regenerateToken();
+
         return redirect('/');
     }
 }
-
-
