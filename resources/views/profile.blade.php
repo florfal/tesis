@@ -8,17 +8,45 @@
         <a href="{{ route('index') }}">
             <div class="back-button">&#8592;</div>  
         </a>
+        <!-- Mensajes flash -->
+        @if(session('status'))
+            <div class="alert alert-success">
+                {{ session('status') }}
+            </div>
+        @endif
         <div class="container">
             <!-- Perfil -->
             <div class="profile-container">
                 <div class="cover-photo">
-                    <img src="img/user/mar.jpg" alt="Foto de portada" class="img-fluid">
+                    <img src="{{ $user->cover ? asset($user->cover) : asset('img/user/mar.jpg') }}" alt="Foto de portada" class="img-fluid">
                 </div>
                 <div class="profile-photo">
-                    <img src="{{ auth()->user()->avatar ?? 'img/user/oso.jpg' }}" alt="Foto de perfil" class="img-fluid">
+                    <img src="{{ $user->avatar ? asset($user->avatar) : asset('img/user/oso.jpg') }}" alt="Foto de perfil" class="img-fluid">
                 </div>
                 <div>
-                    <h5 class="text-center">{{ auth()->user()->name }}</h5>
+                    <h5 class="text-center">{{ $user->name }}</h5>
+                </div>
+                <div class="settings-menu">
+                    <button id="settings-button" class="settings-button">
+                        ⚙️ Configuración
+                    </button>
+
+                    <div id="settings-dropdown" class="settings-dropdown" style="display: none;">
+                        <ul>
+                            <li>
+                                <a href="{{ route('profile.edit') }}">Editar perfil</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('logout') }}"
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    Cerrar sesión
+                                </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
                 <div class="profile-stats d-flex justify-content-around">
                     <div class="stat text-center">
@@ -35,6 +63,7 @@
                     </div>
                 </div>
             </div>
+
 
             <!-- Tabs dinámicos -->
             <div class="navigation-tabs d-flex justify-content-center mt-4">
@@ -105,6 +134,7 @@
                     </a>
                 </div>
             </div>
+            
         </div>
         <br>
         <x-nav></x-nav> 
@@ -130,6 +160,23 @@
                 tabCrearEventos.classList.add('active');
                 tabEventos.classList.remove('active');
             });
+            // Menú de configuración
+            const settingsButton = document.getElementById('settings-button');
+            const settingsDropdown = document.getElementById('settings-dropdown');
+
+            if (settingsButton && settingsDropdown) {
+                settingsButton.addEventListener('click', () => {
+                    const currentDisplay = settingsDropdown.style.display;
+                    settingsDropdown.style.display = currentDisplay === 'block' ? 'none' : 'block';
+                });
+
+                // Opcional: cerrar menú al hacer clic fuera
+                document.addEventListener('click', function(event) {
+                    if (!settingsDropdown.contains(event.target) && !settingsButton.contains(event.target)) {
+                        settingsDropdown.style.display = 'none';
+                    }
+                });
+            }
         </script>
     @else
         <div class="auth-options text-center">

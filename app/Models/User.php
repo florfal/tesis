@@ -21,6 +21,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'avatar',
+        'cover'
     ];
 
     /**
@@ -65,5 +67,29 @@ class User extends Authenticatable
     public function attendingEvents()
     {
         return $this->belongsToMany(Event::class, 'event_user', 'user_id', 'event_id');
+    }
+
+    /**
+     * Relación uno a muchos con Media (avatar y cover)
+     */
+    public function media()
+    {
+        return $this->hasMany(Media::class);
+    }
+
+    /**
+     * Relación uno a uno para avatar
+     */
+    public function avatar()
+    {
+        return $this->hasOne(Media::class)->where('type', 'avatar');
+    }
+
+    /**
+     * Relación uno a uno para cover
+     */
+    public function cover()
+    {
+        return $this->hasOne(Media::class)->where('type', 'cover');
     }
 }

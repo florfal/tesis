@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\EventController;
 
+
 Route::get('/mapa', function () {
     return view('mapa');
 })->name('mapa');
@@ -30,9 +31,6 @@ Route::get('/events', function () {
     return view('events', compact('eventos'));
 })->name('events');
 
-Route::get('/events', function () {
-    return view('events');
-})->name('events');
 
 // Ruta principal
 Route::get('/', function () {
@@ -54,7 +52,7 @@ Route::post('/register', [RegisteredUserController::class, 'store'])
 
 // Perfil del usuario (vista personalizada)
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'show'])->name('profile');
+   Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
 });
 
 // Edición del perfil (métodos edit/update/destroy)
