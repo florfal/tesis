@@ -25,6 +25,7 @@ class Evento extends Model
         'imagen',
         'extra',
         'categoria',
+        'lat',
+        'lng',
     ];
 }
-
