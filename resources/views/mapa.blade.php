@@ -36,27 +36,13 @@
             }));
         d[l] ? console.warn(p + " only loads once. Ignoring:", g) : d[l] = (f, ...n) => r.add(f) && u().then(() => d[l](f, ...n))
     })({
-<<<<<<< HEAD
-        key: "{{ env('AIzaSyDdpAhy1chmRwg6sBcmzBHA1O7RxUDgafY') }}",
-=======
         key: "{{ config('services.google_maps.key') }}",
->>>>>>> 2e75e41e676c4aa6cbe80752eb6570bac4b9d2b4
         v: "weekly",
     });
 
     let map;
 
     async function initMap() {
-<<<<<<< HEAD
-        const { Map } = await google.maps.importLibrary("maps");
-
-        map = new Map(document.getElementById("map"), {
-            center: { lat: -34.5061803, lng: -58.5227185 }, // Ajusta según tu ubicación
-            zoom: 12,
-        });
-    }
-
-=======
         // Carga la librería de Maps
         await google.maps.importLibrary("maps");
 
@@ -202,7 +188,6 @@
 
     // Inicializar mapa cuando esté disponible
     window.initMap = initMap;
->>>>>>> 2e75e41e676c4aa6cbe80752eb6570bac4b9d2b4
     initMap();
 </script>
 
