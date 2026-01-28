@@ -11,41 +11,72 @@ class EventoController extends Controller
     {
         $query = Evento::query();
 
+        // HORARIO (incluye cruces de medianoche)
         if ($request->filled('horario')) {
-            $query->where('hora_inicio', '<=', $request->horario)
-                  ->where('hora_fin', '>=', $request->horario);
+            $h = $request->horario;
+
+            $query->where(function ($q) use ($h) {
+
+                // Caso normal
+                $q->where(function ($q1) use ($h) {
+                    $q1->whereColumn('hora_inicio', '<=', 'hora_fin')
+                       ->whereTime('hora_inicio', '<=', $h)
+                       ->whereTime('hora_fin', '>=', $h);
+                })
+
+                // Caso cruza medianoche
+                ->orWhere(function ($q2) use ($h) {
+                    $q2->whereColumn('hora_inicio', '>', 'hora_fin')
+                       ->where(function ($q3) use ($h) {
+                           $q3->whereTime('hora_inicio', '<=', $h)
+                              ->orWhereTime('hora_fin', '>=', $h);
+                       });
+                });
+            });
         }
 
-        if ($request->filled('precio')) {
-            $query->where('precio', '<=', $request->precio);
+        // PRECIO (rango)
+        $min = $request->input('precio_min');
+        $max = $request->input('precio_max');
+
+        if ($min !== null && $min !== '') {
+            $query->where('precio', '>=', (float)$min);
+        }
+        if ($max !== null && $max !== '') {
+            $query->where('precio', '<=', (float)$max);
         }
 
+        // UBICACION
         if ($request->filled('ubicacion')) {
             $query->where('ubicacion', 'like', '%' . $request->ubicacion . '%');
         }
 
+        // CATEGORIA (robusta)
         if ($request->filled('categoria')) {
-            $query->where('categoria', $request->categoria);
+            $cat = mb_strtolower(trim($request->categoria));
+            $query->whereRaw('LOWER(TRIM(categoria)) = ?', [$cat]);
         }
 
-        if ($request->filled('recientes')) {
-            $query->orderBy('created_at', 'desc');
+        // RECIENTES
+        if ($request->boolean('recientes')) {
+            $query->orderByDesc('created_at');
+        } else {
+            $query->orderByDesc('created_at');
         }
 
         $eventos = $query->get();
 
-        return view('events', compact('eventos')); // Cambiado a 'events'
+        return view('events', compact('eventos'));
     }
+
     public function novedades()
     {
-        $eventos = Evento::all()->groupBy(function ($evento) {
+        $eventos = \App\Models\Evento::all()->groupBy(function ($evento) {
             return $evento->dia . ' ' . $evento->mes;
         });
-    
+
         return view('novedades', [
             'groupedEvents' => $eventos,
         ]);
     }
-    
-
 }

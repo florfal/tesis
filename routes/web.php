@@ -3,9 +3,9 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\EventoController; // controlador en español para eventos listados, novedades, etc.
-use App\Http\Controllers\EventController; // si existe para formas específicas (presencial/virtual)
-use App\Http\Controllers\EventosController; // controlador que expone la API de ubicaciones
+use App\Http\Controllers\EventoController;
+use App\Http\Controllers\EventController;
+use App\Http\Controllers\EventosController; // API ubicaciones
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
@@ -14,16 +14,22 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 // Página principal
 Route::get('/', [HomeController::class, 'index'])->name('index');
 
-// Eventos: listado y detalle
-Route::get('/eventos', [EventoController::class, 'index'])->name('events');
-Route::get('/evento/{id}', [HomeController::class, 'event'])->name('event'); // mantiene compatibilidad con la vista de evento individual
+//  Eventos: listado y detalle
+Route::get('/eventos', [EventosController::class, 'index'])->name('events');
+
+// Detalle (como lo tenés)
+Route::get('/evento/{id}', [HomeController::class, 'event'])->name('event');
+
+//  Ubicaciones (API)
+Route::get('/api/ubicaciones', [EventosController::class, 'ubicaciones'])->name('ubicaciones');
+
 
 // Destacados, novedades y mapa
 Route::get('/destacados', [HomeController::class, 'destacados'])->name('destacados');
-Route::get('/novedades', function () {
-    $groupedEvents = []; // reemplazar con lógica real si no se usa EventoController
-    return view('novedades', compact('groupedEvents'));
-})->name('novedades');
+
+//  Novedades: usa tu controller real
+Route::get('/novedades', [EventoController::class, 'novedades'])->name('novedades');
+
 Route::get('/mapa', function () {
     return view('mapa');
 })->name('mapa');
@@ -61,6 +67,3 @@ Route::get('/form/virtual', [EventController::class, 'createVirtual'])->name('fo
 
 // Incluir rutas de autenticación adicionales generadas por Breeze / Laravel
 require __DIR__ . '/auth.php';
-
-// API: ubicaciones de eventos
-Route::get('/api/ubicaciones', [EventosController::class, 'ubicaciones']);
