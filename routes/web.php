@@ -10,6 +10,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\CheckoutController;
+
 
 // Página principal
 Route::get('/', [HomeController::class, 'index'])->name('index');
@@ -17,12 +19,14 @@ Route::get('/', [HomeController::class, 'index'])->name('index');
 //  Eventos: listado y detalle
 Route::get('/eventos', [EventosController::class, 'index'])->name('events');
 
-// Detalle (como lo tenés)
-Route::get('/evento/{id}', [HomeController::class, 'event'])->name('event');
-
 //  Ubicaciones (API)
 Route::get('/api/ubicaciones', [EventosController::class, 'ubicaciones'])->name('ubicaciones');
 
+// Detalle (como lo tenés)
+Route::get('/evento/{id}', [HomeController::class, 'event'])->name('event');
+
+Route::get('/checkout/{id}', [CheckoutController::class, 'create'])->name('checkout');
+Route::post('/checkout/{id}', [CheckoutController::class, 'store'])->name('checkout.store');
 
 // Destacados, novedades y mapa
 Route::get('/destacados', [HomeController::class, 'destacados'])->name('destacados');
